@@ -2,18 +2,19 @@
 const main = document.getElementById("content")
 
 // main page title
-const title = document.createElement("div")
+const title = document.createElement("h1")
 title.innerText = "Lau's Green Kitchen"
-title.classList =  "title"
+title.classList =  "text-blue-500"
 main.appendChild(title)
 
 // navbar
 const navbar = document.createElement("div")
-navbar.classList = "navbar"
+navbar.classList = "navbar" 
 main.appendChild(navbar)
 
 //navbar unordered list
 const navbarContainer = document.createElement("ul")
+navbarContainer.classList = "navbar-container"
 navbar.appendChild(navbarContainer)
 
 
@@ -36,7 +37,7 @@ navList.forEach(
             
                 case "menu":
                     aboutContent.style.display = "none";
-                    menuContent.style.display = "block";
+                    menuContent.style.display = "flex";
                     contactContent.style.display = "none";
                     break;
             
@@ -71,7 +72,7 @@ contentContainer.appendChild(aboutContent)
 
 //about title
 const aboutTitle = document.createElement("h2")
-aboutTitle.innerText = "Lau's Green Kitchen"
+aboutTitle.innerText = "Our History"
 aboutContent.appendChild(aboutTitle)
 
 // about description
@@ -80,15 +81,19 @@ aboutDescription.innerText = "Lau's Green Kitchen hopes to modernize and revolut
 aboutContent.appendChild(aboutDescription)
 
 
+
 //menu content
 const menuContent = document.createElement("div")
-menuContent.innerText = "menu-content will be displayed here"
 menuContent.classList = "menu-content"
 menuContent.style.display = "none"
 contentContainer.appendChild(menuContent)
 
+//menu title
+// const menuTitle = document.createElement("h2")
+// menuTitle.innerText = "Impossible Menu"
+// menuContent.appendChild(menuTitle)
+
 //contact content
-const contactContentArr = [] 
 const contactContent = document.createElement("div")
 contactContent.classList = "contact-content"
 contactContent.style.display = "none"
@@ -111,3 +116,41 @@ contactInfo.forEach(
 )
 
 
+// menu content info
+class MenuCard{
+    constructor(name, price, picture){
+        this.name = name
+        this.price = price
+        this.picture = picture
+    }
+}
+
+const menuData = [
+    ["Impossible Pizza","$9.90", "../img/impossible-pizza.jpeg"],
+    ["Impossible Whopper","$12.90","../img/cheesy-veggie-burger.jpeg"],
+    ["Impossible Pau","$9.90","../img/impossible-bao.jpeg"],
+    ["Impossible Pie","$12.90","../img/impossible-pie.jpeg"],
+    ["Impossible Puff","$12.90","../img/impossible-puff.jpeg"]
+]
+
+menuData.forEach(
+    arr => {
+        const menuItem = new MenuCard(...arr)
+        // let menuDisplay = document.createElement("p")
+        
+        let menuCard = document.createElement("div")
+        menuCard.style.border = "1px black solid"
+        menuCard.classList = "menu-item"
+        menuContent.appendChild(menuCard)
+
+        let menuCardPic = document.createElement("img")
+        menuCardPic.src = menuItem.picture
+        // menuCardPic.style.width = "250px"
+        menuCard.appendChild(menuCardPic)
+
+        let menuCardDescription = document.createElement("p")
+        menuCardDescription.innerText = `${menuItem.name} 
+        ${menuItem.price}`
+        menuCard.appendChild(menuCardDescription)
+    }
+)
